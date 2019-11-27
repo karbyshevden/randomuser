@@ -1,5 +1,8 @@
 package com.karbyshev.randomuser.data.model;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
+
 import java.util.List;
 
 public class UserModel {
@@ -60,6 +63,27 @@ public class UserModel {
             this.id = id;
             this.picture = picture;
             this.nat = nat;
+        }
+
+        public static DiffUtil.ItemCallback<Results> DIFF_CALLBACK = new DiffUtil.ItemCallback<Results>() {
+            @Override
+            public boolean areItemsTheSame(@NonNull Results oldItem, @NonNull Results newItem) {
+                return oldItem.id == newItem.id;
+            }
+
+            @Override
+            public boolean areContentsTheSame(@NonNull Results oldItem, @NonNull Results newItem) {
+                return oldItem.equals(newItem);
+            }
+        };
+
+        @Override
+        public boolean equals(Object obj) {
+            if (obj == this)
+                return true;
+
+            Results result = (Results) obj;
+            return result.id == this.id;
         }
 
         public String getGender() {
@@ -418,5 +442,10 @@ public class UserModel {
         public String getVersion() {
             return version;
         }
+
+
+
+
     }
+
 }

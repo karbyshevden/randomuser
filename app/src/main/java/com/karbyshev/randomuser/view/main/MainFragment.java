@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,8 +19,8 @@ import com.google.gson.Gson;
 import com.karbyshev.randomuser.R;
 import com.karbyshev.randomuser.data.model.UserModel;
 import com.karbyshev.randomuser.data.repository.Repository;
-import com.karbyshev.randomuser.view.main.adapter.MainRecyclerAdapter;
 import com.karbyshev.randomuser.view.main.adapter.RecyclerItemClickListener;
+import com.karbyshev.randomuser.view.main.adapter.UserPageListAdapter;
 import com.karbyshev.randomuser.viewmodel.MainViewModel;
 import com.karbyshev.randomuser.viewmodel.MainViewModelFactory;
 
@@ -42,7 +41,7 @@ public class MainFragment extends Fragment implements RecyclerItemClickListener 
     @BindView(R.id.mainProgressBar)
     ProgressBar mProgressBar;
 
-    private MainRecyclerAdapter mAdapter;
+    private UserPageListAdapter pageListAdapter;
     private LinearLayoutManager mLayoutManager;
 
     @Nullable
@@ -71,14 +70,15 @@ public class MainFragment extends Fragment implements RecyclerItemClickListener 
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(mActivity);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new MainRecyclerAdapter();
-        mRecyclerView.setAdapter(mAdapter);
-        mAdapter.setOnItemClickListener(this);
+
+        pageListAdapter = new UserPageListAdapter();
+        pageListAdapter.setOnItemClickListener(this);
+        mRecyclerView.setAdapter(pageListAdapter);
     }
 
     private void bindUI() {
-        mViewModel.getUserList().observe(this, userModel -> {
-            mAdapter.addAll(userModel.getResults());
+        mViewModel.getPagedListLiveData().observe(this, pagedList -> {
+            pageListAdapter.submitList(pagedList);
             progressBarIsVisible(false);
         });
     }

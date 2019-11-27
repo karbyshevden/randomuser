@@ -13,10 +13,12 @@ import io.reactivex.schedulers.Schedulers;
 
 public class Repository {
     private static final String TAG = "Repository";
+    private final static String PARAM_PAGE = "page";
     private static final String PARAM_SIZE = "results";
 
-    public static Single<UserModel> getUsers(int pageSize) {
+    public static Single<UserModel> getUsers(int page, int pageSize) {
         HashMap<String, String> map = new HashMap<>();
+        map.put(PARAM_PAGE, Integer.toString(page));
         map.put(PARAM_SIZE, Integer.toString(pageSize));
 
         return RetrofitService.getApi().getUserModel(map)
