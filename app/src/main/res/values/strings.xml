@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">randomuser</string>
+    <string name="something_wrong">Uh oh, something has gone wrong.</string>
+    <string name="cell_phone">Cell Phone</string>
+    <string name="empty">--</string>
+    <string name="email">Email</string>
+    <string name="skype">Skype</string>
 </resources>
