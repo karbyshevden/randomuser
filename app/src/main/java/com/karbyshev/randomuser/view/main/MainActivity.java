@@ -6,6 +6,8 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import com.karbyshev.randomuser.R;
@@ -26,5 +28,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onSupportNavigateUp() {
         return NavigationUI.navigateUp(mNavController, (DrawerLayout) null);
+    }
+
+    public void dialPhoneNumber(String cell){
+        Intent cellIntent = new Intent(Intent.ACTION_DIAL);
+        cellIntent.setData(Uri.parse("tel:" + cell));
+        if (cellIntent.resolveActivity(getPackageManager()) != null){
+            startActivity(cellIntent);
+        }
     }
 }

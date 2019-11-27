@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.karbyshev.randomuser.view.main.MainFragment"
-        android:label="main_fragment"
+        android:label="Home"
         tools:layout="@layout/main_fragment" >
         <action
             android:id="@+id/action_mainFragment_to_profileFragment"
@@ -17,6 +17,6 @@
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.karbyshev.randomuser.view.profile.ProfileFragment"
-        android:label="fragment_profile"
+        android:label="Profile"
         tools:layout="@layout/fragment_profile" />
 </navigation>
